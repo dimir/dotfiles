@@ -1,0 +1,15 @@
+partial modifier_keys
+xkb_symbols "caps_mod4" {
+	    replace key <CAPS> {
+	    	    [ VoidSymbol, VoidSymbol ]
+		    };
+		    modifier_map Mod5 { <CAPS> };
+		    replace key <MENU> {
+		    	    [ VoidSymbol, VoidSymbol ]
+			    };
+			    modifier_map Mod5 { <MENU> };
+};
+
+xkb_symbols "my_parens" {
+	    key <LSGT> { [ parenleft, parenright ] };
+};
