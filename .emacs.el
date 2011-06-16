@@ -1,10 +1,14 @@
-;; RoR
-; needed for rails mode
+;; Additional stuff
 (setq load-path (cons "~/.emacs.d" load-path))
+
 (require 'snippet)
 (require 'find-recursive)
-(setq load-path (cons "~/.emacs.d/emacs-rails" load-path))
-(require 'rails)
+(require 'vl-search)
+
+;; RoR
+; needed for rails mode
+;(setq load-path (cons "~/.emacs.d/emacs-rails" load-path))
+;(require 'rails)
 
 ;; Do we need the #file.txt# backup files?
 ;(setq make-backup-files nil)
@@ -44,7 +48,7 @@
 (global-font-lock-mode 1)
 
 ;; Activating ecb
-(global-set-key (kbd "\e\ee") 'ecb-activate)
+;(global-set-key (kbd "\e\ee") 'ecb-activate)
 
 ;; Custom key bindings
 (global-set-key "\M-g" 'goto-line)
@@ -64,35 +68,43 @@
 
 ;; TXT mode
 (add-to-list 'auto-mode-alist '("README\\'" . text-mode))
+(add-to-list 'auto-mode-alist '("svn-commit.tmp\\'" . text-mode))
+(add-to-list 'auto-mode-alist '("mutt-dimir-" . text-mode))
 
 ;; C indention, use spaces
-(require 'cc-mode)
-(defun my-build-tab-stop-list (width)
-  (let ((num-tab-stops (/ 80 width))
-	(counter 1)
-	(ls nil))
-    (while (<= counter num-tab-stops)
-      (setq ls (cons (* width counter) ls))
-      (setq counter (1+ counter)))
-    (set (make-local-variable 'tab-stop-list) (nreverse ls))))
+;;(require 'cc-mode)
+;;(defun my-build-tab-stop-list (width)
+;;  (let ((num-tab-stops (/ 80 width))
+;;	(counter 1)
+;;	(ls nil))
+;;    (while (<= counter num-tab-stops)
+;;      (setq ls (cons (* width counter) ls))
+;;      (setq counter (1+ counter)))
+;;    (set (make-local-variable 'tab-stop-list) (nreverse ls))))
+
 (defun my-c-mode-common-hook ()
-  (setq tab-width 4) ;; change this to taste (K&R uses 5)
-  (my-build-tab-stop-list tab-width)
+  (setq tab-width 8)
   (setq c-basic-offset tab-width)
-  (setq indent-tabs-mode nil)) ;; force only spaces for indentation
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+  (c-set-offset 'substatement-open '0)) ; brackets should be at same indentation level as condition
+  ;;(c-echo-syntactic-information-p t))
+  ;;(my-build-tab-stop-list tab-width)
+  ;;(setq indent-tabs-mode t)) ;; nil == force only spaces for indentation
 
 ;; Linux indention
 (defun linux-c-mode ()
   "C mode with adjusted defaults for use with the Linux kernel."
+  (setq tab-width 8)
+  (setq c-basic-offset 8)
   (interactive)
   (c-mode)
   (c-set-style "K&R")
-  (setq tab-width 8)
-  (setq indent-tabs-mode t)
-  (setq c-basic-offset 8))
+  (setq indent-tabs-mode t))
+
+;; Default c-mode
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;; goodies
+
 ;; -- auto-complete
 (require 'auto-complete)
 (require 'auto-complete-config)
@@ -126,9 +138,9 @@
 
 ;(if (fboundp 'line-number-mode)
 ;    (line-number-mode -1))
-
-(if (fboundp 'column-number-mode)
-    (column-number-mode -1))
+;
+;(if (fboundp 'column-number-mode)
+;    (column-number-mode -1))
 
 ;; I want unique buffer names with hints as to where the files are.
 (require 'uniquify)
@@ -156,6 +168,7 @@
   (run-at-time sec nil '(lambda ()
                           (ding t) (ding t)
                           (message "Your tea is ready!"))))
+
 
 ;;;;;;;;;;;;;;;;; Do not change anything below ;;;;;;;;;;;;;;;;;;;;;;
 (custom-set-variables
