@@ -45,11 +45,16 @@ layouts =
 -- }}}
 
 -- {{{ Tags
--- Define a tag table which hold all screen tags.
-tags = {}
+-- Define a tag table which will hold all screen tags.
+tags = {
+   names  = { 1,           2,          3,           4,          5,
+	      6,           7,          8,           9 },
+   layout = { layouts[3],  layouts[1], layouts[12], layouts[1], layouts[1],
+	      layouts[12], layouts[1], layouts[1],  layouts[1]
+	}}
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+   -- Each screen has its own tag table.
+   tags[s] = awful.tag(tags.names, s, tags.layout)
 end
 -- }}}
 
@@ -172,7 +177,7 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "j",
         function ()
-            awful.client.focus.byidx( 1)
+            awful.client.focus.byidx(1)
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "k",
@@ -191,8 +196,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
+            if client.focus then client.focus:raise()
             end
         end),
 
