@@ -1,0 +1,31 @@
+[user]
+	name = Vladimir Levijev
+	email = vladimir.levijev@gmail.com
+[alias]
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[color]
+	branch = auto
+  	diff = auto
+  	status = auto
+[color "branch"]
+       current = yellow reverse
+       local = yellow
+       remote = green
+[color "diff"]
+       meta = yellow bold
+       frag = magenta bold
+       old = red bold
+       new = green bold
+[color "status"]
+       added = yellow
+       changed = green
+       untracked = cyan
+[giggle]
+	main-window-maximized = true
+	main-window-geometry = 700x550+0+187
+	history-view-vpane-position = 430
+	main-window-view = HistoryView
+	file-view-hpane-position = 249
+	file-view-vpane-position = 320
+[push]
+	default = tracking
