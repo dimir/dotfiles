@@ -169,6 +169,8 @@
                           (ding t) (ding t)
                           (message "Your tea is ready!"))))
 
+;; Disable abbrev save to prevent weird annoying
+(setq save-abbrevs nil)
 
 ;;;;;;;;;;;;;;;;; Do not change anything below ;;;;;;;;;;;;;;;;;;;;;;
 (custom-set-variables
