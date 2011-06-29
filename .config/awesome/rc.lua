@@ -7,6 +7,57 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
+-- {{{ My custom functions
+require("lfs")
+local function processwalker()
+   local function yieldprocess()
+      for dir in lfs.dir("/proc") do
+        -- All directories in /proc containing a number, represent a process
+	 if tonumber(dir) ~= nil then
+	    local f, err = io.open("/proc/"..dir.."/cmdline")
+          if f then
+	     local cmdline = f:read("*all")
+	     f:close()
+            if cmdline ~= "" then
+	       coroutine.yield(cmdline)
+            end
+	 end
+      end
+   end
+end
+   return coroutine.wrap(yieldprocess)
+end
+local function run_once(process, cmd)
+   assert(type(process) == "string")
+   local regex_killer = {
+      ["+"] = "%+", ["-"] = "%-",
+      ["*"] = "%*", ["?"] = "%?" }
+
+   for p in processwalker() do
+      if p:find(process:gsub("[-+?*]", regex_killer)) then
+	  return
+      end
+   end
+   return awful.util.spawn(cmd or process)
+end
+local function toggle_process(process)
+   local f, p, status, signal
+   f = io.popen("pgrep "..process)
+   p = f:read()
+   f:close()
+
+   f = io.popen("cut -d' ' -f3 /proc/"..p.."/stat")
+   status = f:read()
+   f:close()
+
+   signal = "SIGSTOP"
+   if status == "T" then
+      signal = "SIGCONT"
+   end
+   awful.util.spawn("kill -"..signal.." "..p)
+end
+-- }}}
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
@@ -189,6 +240,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
+    -- Pause mplayer
+    awful.key({ modkey,           }, "p",     function () toggle_process("mplayer")     end),
+
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
@@ -320,44 +374,11 @@ client.add_signal("manage", function (c, startup)
     end
 end)
 
-client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.add_signal("focus",   function(c) c.border_color = beautiful.border_focus  end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
 -- {{{ Startup
-require("lfs") 
-local function processwalker()
-   local function yieldprocess()
-      for dir in lfs.dir("/proc") do
-        -- All directories in /proc containing a number, represent a process
-	 if tonumber(dir) ~= nil then
-	    local f, err = io.open("/proc/"..dir.."/cmdline")
-          if f then
-	     local cmdline = f:read("*all")
-	     f:close()
-            if cmdline ~= "" then
-	       coroutine.yield(cmdline)
-            end
-	 end
-      end
-   end
-end
-   return coroutine.wrap(yieldprocess)
-end
-local function run_once(process, cmd)
-   assert(type(process) == "string")
-   local regex_killer = {
-      ["+"]  = "%+", ["-"] = "%-",
-      ["*"]  = "%*", ["?"]  = "%?" }
-
-   for p in processwalker() do
-      if p:find(process:gsub("[-+?*]", regex_killer)) then
-	  return
-      end
-   end
-   return awful.util.spawn(cmd or process)
-end
-
 run_once("konsole")
 run_once("kmix")
 run_once("kxkb")
