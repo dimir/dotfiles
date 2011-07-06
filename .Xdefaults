@@ -1,0 +1,51 @@
+! Defaults for all xterm clients
+XTerm*faceName: Dejavu Sans Mono:size=10
+XTerm*boldFont: Dejavu Sans Mono:style=Bold:size=10
+XTerm*loginShell: true
+XTerm*scrollBar: false
+XTerm*eightBitInput: false
+XTerm*colorMode: true
+XTerm*utf8: 1
+XTerm*reverseVideo: false
+XTerm*color0: black
+XTerm*color1: red
+XTerm*color2: green
+XTerm*color3: yellow
+XTerm*color4: blue
+XTerm*color5: magenta
+XTerm*color6: cyan
+XTerm*color7: white
+XTerm*background:   black
+XTerm*foreground:   white
+!XTerm*highlightColor:  red
+
+! XTerm double-click word selection (man xterm - CHARACTER CLASSES)
+! (treat [#&-./:=?~] as alphanumeric (48))
+XTerm*charClass: 35:48,38:48,45-47:48,58:48,61:48,63:48,126:48
+
+UXTerm*faceName: Dejavu Sans Mono:size=10
+UXTerm*boldFont: Dejavu Sans Mono:style=Bold:size=10
+UXTerm*loginShell: true
+UXTerm*scrollBar: false
+UXTerm*eightBitInput: false
+UXTerm*colorMode: true
+UXTerm*utf8: 1
+UXTerm*reverseVideo: false
+UXTerm*color0: black
+UXTerm*color1: red
+UXTerm*color2: green
+UXTerm*color3: yellow
+UXTerm*color4: blue
+UXTerm*color5: magenta
+UXTerm*color6: cyan
+UXTerm*color7: white
+!UXTerm*background:   black
+!UXTerm*foreground:   white
+!UXTerm*highlightColor:  red
+
+! After making the changes run
+!
+!   xrdb ~/.Xdefaults
+!
+! "man xrdb" and "man X" and search for "Resources" for more
+! information.
