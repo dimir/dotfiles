@@ -18,12 +18,6 @@
 (setq inhibit-startup-echo-area-message t)
 (setq initial-scratch-message nil)
 
-;; To turn it on for every buffer in a certain mode, you must use the hook
-;; for that mode.  This turns on auto-fill mode for all text buffers
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-;; If you want auto-fill mode on in all major modes, uncomment this:
-;(setq-default auto-fill-hook 'do-auto-fill)
-
 ;; Compilation window shall scroll down
 (setq compilation-scroll-output 1)
 
@@ -69,7 +63,16 @@
 ;; TXT mode
 (add-to-list 'auto-mode-alist '("README\\'" . text-mode))
 (add-to-list 'auto-mode-alist '("svn-commit.tmp\\'" . text-mode))
-(add-to-list 'auto-mode-alist '("mutt-dimir-" . text-mode))
+(add-to-list 'auto-mode-alist '("mutt-" . text-mode))
+
+;; Turn on auto-fill mode for all text buffers
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; If you want auto-fill mode on in all major modes, uncomment this:
+;(setq-default auto-fill-hook 'do-auto-fill)
+
+;; Turn on spellcheck for text mode
+(add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; C indention, use spaces
 ;;(require 'cc-mode)
@@ -171,23 +174,3 @@
 
 ;; Disable abbrev save to prevent weird annoying
 (setq save-abbrevs nil)
-
-;;;;;;;;;;;;;;;;; Do not change anything below ;;;;;;;;;;;;;;;;;;;;;;
-(custom-set-variables
-  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
-  ;; Your init file should contain only one such instance.
- '(case-fold-search t)
- '(current-language-environment "UTF-8")
- '(default-input-method "rfc1345")
- '(ecb-compile-window-height 10)
- '(ecb-compile-window-temporally-enlarge (quote after-selection))
- '(ecb-compile-window-width (quote edit-window))
- '(ecb-layout-name "left1")
- '(ecb-options-version "2.27")
- '(global-font-lock-mode t nil (font-lock))
- '(show-paren-mode t nil (paren))
- '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify))))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
-  ;; Your init file should contain only one such instance.
- )
