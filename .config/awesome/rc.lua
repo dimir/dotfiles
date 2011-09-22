@@ -343,6 +343,8 @@ awful.rules.rules = {
     { rule = { class = "Iceweasel" },
       properties = { tag = tags[1][6] } },
     { rule = { class = "Gwenview" },
+      properties = { tag = tags[1][8] } },
+    { rule = { class = "Meld" },
       properties = { tag = tags[1][8] } }
 }
 -- }}}
