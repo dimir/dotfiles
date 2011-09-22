@@ -371,7 +371,6 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- {{{ Startup
-run_once("konsole")
 run_once("kmix")
 run_once("kxkb")
 run_once("klipper")
