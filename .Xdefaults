@@ -23,6 +23,9 @@ XTerm*foreground:   white
 ! (treat [#&-./:=?~] as alphanumeric (48))
 XTerm*charClass: 35:48,38:48,45-47:48,58:48,61:48,63:48,126:48
 
+! Bell in order to support irssi notifications
+XTerm*bellIsUrgent: true
+
 UXTerm*faceName: Dejavu Sans Mono:size=10
 UXTerm*boldFont: Dejavu Sans Mono:style=Bold:size=10
 UXTerm*loginShell: true
