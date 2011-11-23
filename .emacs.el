@@ -88,10 +88,17 @@
 (defun my-c-mode-common-hook ()
   (setq tab-width 8)
   (setq c-basic-offset tab-width)
-  (c-set-offset 'substatement-open '0)) ; brackets should be at same indentation level as condition
+  (c-set-offset 'substatement-open 0) ; brackets should be at same indentation level as condition
+
+  (c-set-offset 'statement-cont 16)
+  (c-set-offset 'arglist-close 16)
+  (c-set-offset 'arglist-intro 16)
+  (c-set-offset 'arglist-cont-nonempty 16)
+
   ;;(c-echo-syntactic-information-p t))
   ;;(my-build-tab-stop-list tab-width)
   ;;(setq indent-tabs-mode t)) ;; nil == force only spaces for indentation
+  )
 
 ;; Linux indention
 (defun linux-c-mode ()
