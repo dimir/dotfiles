@@ -62,7 +62,7 @@
 
 ;; TXT mode
 (add-to-list 'auto-mode-alist '("README\\'" . text-mode))
-(add-to-list 'auto-mode-alist '("svn-commit.\\'" . text-mode))
+(add-to-list 'auto-mode-alist '("svn-commit." . text-mode))
 (add-to-list 'auto-mode-alist '("mutt-" . text-mode))
 
 ;; Turn on auto-fill mode for all text buffers
