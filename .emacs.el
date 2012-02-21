@@ -95,6 +95,8 @@
   (c-set-offset 'arglist-intro 16)
   (c-set-offset 'arglist-cont-nonempty 16)
 
+  (c-set-offset 'case-label 8)
+
   ;;(c-echo-syntactic-information-p t))
   ;;(my-build-tab-stop-list tab-width)
   ;;(setq indent-tabs-mode t)) ;; nil == force only spaces for indentation
