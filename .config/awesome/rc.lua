@@ -6,6 +6,10 @@ require("awful.rules")
 require("beautiful")
 -- Notification library
 require("naughty")
+-- Volume control
+require("volume")
+-- Keyboard Layout
+require("kbd")
 
 -- {{{ My custom functions
 require("lfs")
@@ -175,16 +179,18 @@ for s = 1, screen.count() do
     mywibox[s] = awful.wibox({ position = "top", screen = s })
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
-        {
-            mytaglist[s],
-            mypromptbox[s],
-            layout = awful.widget.layout.horizontal.leftright
-        },
-        mylayoutbox[s],
-        mytextclock,
-        s == 1 and mysystray or nil,
-        mytasklist[s],
-        layout = awful.widget.layout.horizontal.rightleft
+       {
+	  mytaglist[s],
+	  mypromptbox[s],
+	  layout = awful.widget.layout.horizontal.leftright
+       },
+       mylayoutbox[s],
+       mytextclock,
+       volume_widget,
+       kbd_widget,
+       s == 1 and mysystray or nil,
+       mytasklist[s],
+       layout = awful.widget.layout.horizontal.rightleft
     }
 end
 -- }}}
@@ -245,6 +251,11 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+
+    -- Volume control
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+", false) end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 9%-", false) end),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer sset Master toggle", false) end),
 
     awful.key({ modkey }, "x",
               function ()
@@ -374,12 +385,21 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- {{{ Startup
-run_once("kmix")
-run_once("kxkb")
-run_once("klipper")
-run_once("wicd-client")
+run_once("wicd-gtk")
 run_once("skype")
 run_once("pidgin")
 run_once("iron")
+run_once("kbdd")
 -- }}}
 
+-- {{{ D-Bus
+dbus.request_name("session", "ru.gentoo.kbdd")
+dbus.add_match("session", "interface='ru.gentoo.kbdd',member='layoutChanged'")
+dbus.add_signal("ru.gentoo.kbdd", function(...)
+				     local data = {...}
+				     local layout = data[2]
+				     lts = {[0] = "Eng", [1] = "Est", [2] = "Pyc"}
+				     kbd_widget.text = " "..lts[layout].." "
+				  end
+	     )
+-- }}}
