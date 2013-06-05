@@ -186,8 +186,8 @@ for s = 1, screen.count() do
        },
        mylayoutbox[s],
        mytextclock,
-       volume_widget,
        kbd_widget,
+       volume_widget,
        s == 1 and mysystray or nil,
        mytasklist[s],
        layout = awful.widget.layout.horizontal.rightleft
@@ -251,11 +251,6 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
-
-    -- Volume control
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+", false) end),
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 9%-", false) end),
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer sset Master toggle", false) end),
 
     awful.key({ modkey }, "x",
               function ()
@@ -328,6 +323,7 @@ clientbuttons = awful.util.table.join(
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
+globalkeys = awful.util.table.join(globalkeys, volumekeys)
 root.keys(globalkeys)
 -- }}}
 
@@ -352,6 +348,8 @@ awful.rules.rules = {
       properties = { tag = tags[1][4] } },
     { rule = { class = "Pidgin" },
       properties = { tag = tags[1][5] } },
+    { rule = { class = "Firefox" },
+      properties = { tag = tags[1][6] } },
     { rule = { class = "Iceweasel" },
       properties = { tag = tags[1][6] } },
     { rule = { class = "Gwenview" },
@@ -386,20 +384,9 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 -- {{{ Startup
 run_once("wicd-gtk")
+run_once("klipper")
 run_once("skype")
 run_once("pidgin")
 run_once("iron")
 run_once("kbdd")
--- }}}
-
--- {{{ D-Bus
-dbus.request_name("session", "ru.gentoo.kbdd")
-dbus.add_match("session", "interface='ru.gentoo.kbdd',member='layoutChanged'")
-dbus.add_signal("ru.gentoo.kbdd", function(...)
-				     local data = {...}
-				     local layout = data[2]
-				     lts = {[0] = "Eng", [1] = "Est", [2] = "Pyc"}
-				     kbd_widget.text = " "..lts[layout].." "
-				  end
-	     )
 -- }}}

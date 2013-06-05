@@ -32,3 +32,11 @@
 
  update_volume(volume_widget)
  awful.hooks.timer.register(1, function () update_volume(volume_widget) end)
+
+ volumekeys = awful.util.table.join(
+    -- Volume control
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+", false) end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 9%-", false) end),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer sset Master toggle", false) end)
+ )
+
