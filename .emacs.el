@@ -5,6 +5,10 @@
 (require 'find-recursive)
 (require 'vl-search)
 
+;; don't break a line after the first or before the last word of a sentence
+(add-to-list 'fill-nobreak-predicate 'fill-single-word-nobreak-p)
+(setq sentence-end-double-space nil)
+
 ;; RoR
 ; needed for rails mode
 ;(setq load-path (cons "~/.emacs.d/emacs-rails" load-path))
@@ -67,23 +71,17 @@
 
 ;; Turn on auto-fill mode for all text buffers
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'java-mode-hook 'turn-on-auto-fill)
+
+;; Wrap text at 70, java code at 120
+(add-hook 'text-mode-hook '(lambda() (set-fill-column 70)))
+(add-hook 'java-mode-hook '(lambda() (set-fill-column 120)))
 
 ;; If you want auto-fill mode on in all major modes, uncomment this:
-;(setq-default auto-fill-hook 'do-auto-fill)
+(setq-default auto-fill-hook 'do-auto-fill)
 
 ;; Turn on spellcheck for text mode
 (add-hook 'text-mode-hook 'flyspell-mode)
-
-;; C indention, use spaces
-;;(require 'cc-mode)
-;;(defun my-build-tab-stop-list (width)
-;;  (let ((num-tab-stops (/ 80 width))
-;;	(counter 1)
-;;	(ls nil))
-;;    (while (<= counter num-tab-stops)
-;;      (setq ls (cons (* width counter) ls))
-;;      (setq counter (1+ counter)))
-;;    (set (make-local-variable 'tab-stop-list) (nreverse ls))))
 
 (defun my-c-mode-common-hook ()
   (setq tab-width 8)
@@ -96,10 +94,6 @@
   (c-set-offset 'arglist-cont-nonempty 16)
 
   (c-set-offset 'case-label 8)
-
-  ;;(c-echo-syntactic-information-p t))
-  ;;(my-build-tab-stop-list tab-width)
-  ;;(setq indent-tabs-mode t)) ;; nil == force only spaces for indentation
   )
 
 ;; Linux indention
