@@ -75,6 +75,23 @@
 
 ;; C mode
 (add-hook 'auto-mode-alist '("\\.c\\." . c-mode))
+(defun my-c-mode-common-hook ()
+  (setq tab-width 8)
+  (setq c-basic-offset tab-width)
+  (c-set-offset 'substatement-open 0) ; brackets should be at same indentation level as condition
+  (c-set-offset 'statement-cont 16)
+  (c-set-offset 'arglist-close 16)
+  (c-set-offset 'arglist-intro 16)
+  (c-set-offset 'arglist-cont-nonempty 16)
+  (c-set-offset 'case-label 8))
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;; Perl mode
+(defun my-perl-mode-hook ()
+  (setq tab-width 8)
+  (setq perl-indent-level 8)
+  (setq perl-tab-always-indent t))
+(add-hook 'perl-mode-hook 'my-perl-mode-hook)
 
 ;; Wrap text at 70, java code at 120
 (add-hook 'text-mode-hook '(lambda() (set-fill-column 70)))
@@ -86,19 +103,6 @@
 ;; Turn on spellcheck for text mode
 (add-hook 'text-mode-hook 'flyspell-mode)
 
-(defun my-c-mode-common-hook ()
-  (setq tab-width 8)
-  (setq c-basic-offset tab-width)
-  (c-set-offset 'substatement-open 0) ; brackets should be at same indentation level as condition
-
-  (c-set-offset 'statement-cont 16)
-  (c-set-offset 'arglist-close 16)
-  (c-set-offset 'arglist-intro 16)
-  (c-set-offset 'arglist-cont-nonempty 16)
-
-  (c-set-offset 'case-label 8)
-  )
-
 ;; Linux indention
 (defun linux-c-mode ()
   "C mode with adjusted defaults for use with the Linux kernel."
@@ -108,9 +112,6 @@
   (c-mode)
   (c-set-style "K&R")
   (setq indent-tabs-mode t))
-
-;; Default c-mode
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 ;; goodies
 
@@ -147,9 +148,9 @@
 
 ;(if (fboundp 'line-number-mode)
 ;    (line-number-mode -1))
-;
-;(if (fboundp 'column-number-mode)
-;    (column-number-mode -1))
+
+(if (fboundp 'column-number-mode)
+    (column-number-mode -1))
 
 ;; I want unique buffer names with hints as to where the files are.
 (require 'uniquify)
