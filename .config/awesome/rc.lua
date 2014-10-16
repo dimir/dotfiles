@@ -99,10 +99,10 @@ layouts =
 -- {{{ Tags
 -- Define a tag table which will hold all screen tags.
 tags = {
-   names  = { 1,           2,          3,           4,          5,
-	      6,           7,          8,           9 },
-   layout = { layouts[3],  layouts[1], layouts[12], layouts[1], layouts[1],
-	      layouts[12], layouts[1], layouts[1],  layouts[1]
+   names  = { 1,           2,           3,           4,          5,
+	      6,           7,           8,           9 },
+   layout = { layouts[12], layouts[12], layouts[12], layouts[12], layouts[12],
+	      layouts[12], layouts[12], layouts[12], layouts[12]
 	}}
 for s = 1, screen.count() do
    -- Each screen has its own tag table.
@@ -342,7 +342,7 @@ awful.rules.rules = {
     { rule = { class = "gimp" },
       properties = { floating = true } },
     -- Apply tags to clients
-    { rule = { class = "Iron" },
+    { rule = { class = "chrome" },
       properties = { tag = tags[1][3] } },
     { rule = { class = "Skype" },
       properties = { tag = tags[1][4] } },
@@ -352,7 +352,11 @@ awful.rules.rules = {
       properties = { tag = tags[1][6] } },
     { rule = { class = "Iceweasel" },
       properties = { tag = tags[1][6] } },
+    { rule = { class = "rdesktop" },
+      properties = { tag = tags[1][6] } },
     { rule = { class = "Gwenview" },
+      properties = { tag = tags[1][8] } },
+    { rule = { class = "gimp" },
       properties = { tag = tags[1][8] } },
     { rule = { class = "Meld" },
       properties = { tag = tags[1][8] } }
@@ -387,6 +391,6 @@ run_once("wicd-gtk")
 run_once("klipper")
 run_once("skype")
 run_once("pidgin")
-run_once("iron")
+run_once("google-chrome-stable")
 run_once("kbdd")
 -- }}}

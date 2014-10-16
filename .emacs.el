@@ -73,6 +73,9 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'java-mode-hook 'turn-on-auto-fill)
 
+;; C mode
+(add-hook 'auto-mode-alist '("\\.c\\." . c-mode))
+
 ;; Wrap text at 70, java code at 120
 (add-hook 'text-mode-hook '(lambda() (set-fill-column 70)))
 (add-hook 'java-mode-hook '(lambda() (set-fill-column 120)))
