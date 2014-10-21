@@ -90,7 +90,10 @@
 (defun my-perl-mode-hook ()
   (setq tab-width 8)
   (setq perl-indent-level 8)
-  (setq perl-tab-always-indent t))
+  (setq perl-continued-brace-offset -8)
+  (setq perl-tab-always-indent t)
+  (setq perl-continued-statement-offset 8)
+  (setq perl-indent-continued-arguments 8))
 (add-hook 'perl-mode-hook 'my-perl-mode-hook)
 
 ;; Wrap text at 70, java code at 120
