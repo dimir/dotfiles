@@ -339,10 +339,10 @@ awful.rules.rules = {
     -- Always floating clients
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
-    { rule = { class = "gimp" },
+    { rule = { class = "Gimp" },
       properties = { floating = true } },
     -- Apply tags to clients
-    { rule = { class = "chrome" },
+    { rule = { class = "Google-chrome-stable" },
       properties = { tag = tags[1][3] } },
     { rule = { class = "Skype" },
       properties = { tag = tags[1][4] } },
@@ -350,13 +350,13 @@ awful.rules.rules = {
       properties = { tag = tags[1][5] } },
     { rule = { class = "Firefox" },
       properties = { tag = tags[1][6] } },
-    { rule = { class = "Iceweasel" },
+    { rule = { class = "Tor Browser" },
       properties = { tag = tags[1][6] } },
     { rule = { class = "rdesktop" },
       properties = { tag = tags[1][6] } },
     { rule = { class = "Gwenview" },
       properties = { tag = tags[1][8] } },
-    { rule = { class = "gimp" },
+    { rule = { class = "Gimp" },
       properties = { tag = tags[1][8] } },
     { rule = { class = "Meld" },
       properties = { tag = tags[1][8] } }
