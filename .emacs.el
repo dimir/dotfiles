@@ -96,6 +96,12 @@
   (setq perl-indent-continued-arguments 8))
 (add-hook 'perl-mode-hook 'my-perl-mode-hook)
 
+;; Shell-script mode
+(defun my-sh-mode-hook ()
+  (setq sh-basic-offset 8)
+  (setq indent-tabs-mode t))
+(add-hook 'sh-mode-hook 'my-sh-mode-hook)
+
 ;; Wrap text at 70, java code at 120
 (add-hook 'text-mode-hook '(lambda() (set-fill-column 70)))
 (add-hook 'java-mode-hook '(lambda() (set-fill-column 120)))
