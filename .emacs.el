@@ -155,11 +155,11 @@
 (if (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
 
-;(if (fboundp 'line-number-mode)
-;    (line-number-mode -1))
+(if (fboundp 'line-number-mode)
+    (line-number-mode 1))
 
 (if (fboundp 'column-number-mode)
-    (column-number-mode -1))
+    (column-number-mode 1))
 
 ;; I want unique buffer names with hints as to where the files are.
 (require 'uniquify)
