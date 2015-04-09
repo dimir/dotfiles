@@ -354,6 +354,8 @@ awful.rules.rules = {
       properties = { tag = tags[1][6] } },
     { rule = { class = "rdesktop" },
       properties = { tag = tags[1][6] } },
+    { rule = { class = "VirtualBox" },
+      properties = { tag = tags[1][7] } },
     { rule = { class = "Gwenview" },
       properties = { tag = tags[1][8] } },
     { rule = { class = "Gimp" },
