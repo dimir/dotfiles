@@ -96,6 +96,12 @@
   (setq perl-indent-continued-arguments 8))
 (add-hook 'perl-mode-hook 'my-perl-mode-hook)
 
+;; Shell-script mode
+(defun my-sh-mode-hook ()
+  (setq sh-basic-offset 8)
+  (setq indent-tabs-mode t))
+(add-hook 'sh-mode-hook 'my-sh-mode-hook)
+
 ;; Wrap text at 70, java code at 120
 (add-hook 'text-mode-hook '(lambda() (set-fill-column 70)))
 (add-hook 'java-mode-hook '(lambda() (set-fill-column 120)))
@@ -149,11 +155,11 @@
 (if (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
 
-;(if (fboundp 'line-number-mode)
-;    (line-number-mode -1))
+(if (fboundp 'line-number-mode)
+    (line-number-mode 1))
 
 (if (fboundp 'column-number-mode)
-    (column-number-mode -1))
+    (column-number-mode 1))
 
 ;; I want unique buffer names with hints as to where the files are.
 (require 'uniquify)
