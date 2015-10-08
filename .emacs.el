@@ -1,5 +1,5 @@
 ;; Additional stuff
-(setq load-path (cons "~/.emacs.d" load-path))
+(setq load-path (cons "/home/vl/git/dotfiles/.emacs.d" load-path))
 
 (require 'snippet)
 (require 'find-recursive)
@@ -60,6 +60,12 @@
 ;; PHP mode
 (add-to-list 'auto-mode-alist '("\\.inc\\'" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.module\\'" . php-mode))
+(add-hook 'php-mode-hook 'my-php-mode-hook)
+(defun my-php-mode-hook ()
+  "My PHP mode configuration."
+  (setq indent-tabs-mode t
+	tab-width 8
+	c-basic-offset 8))
 
 ;; HTML mode
 (add-to-list 'auto-mode-alist '("\\.tmpl\\'" . sgml-mode))
@@ -101,6 +107,12 @@
   (setq sh-basic-offset 8)
   (setq indent-tabs-mode t))
 (add-hook 'sh-mode-hook 'my-sh-mode-hook)
+
+;; Shell-script mode
+(defun my-js-mode-hook ()
+  (setq js-indent-level 8)
+  (setq indent-tabs-mode t))
+(add-hook 'js-mode-hook 'my-js-mode-hook)
 
 ;; Wrap text at 70, java code at 120
 (add-hook 'text-mode-hook '(lambda() (set-fill-column 70)))
