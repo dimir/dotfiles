@@ -1,8 +1,10 @@
  volume_widget = widget({ type = "textbox", name = "tb_volume",
 			  align = "right" })
 
+ VOLUME_MIXER_CONTROL = "Master"
+
  function update_volume(widget)
-    local fd = io.popen("amixer sget Master")
+    local fd = io.popen("amixer sget " .. VOLUME_MIXER_CONTROL)
     local status = fd:read("*all")
     fd:close()
         
@@ -35,8 +37,8 @@
 
  volumekeys = awful.util.table.join(
     -- Volume control
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 9%+", false) end),
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 9%-", false) end),
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer sset Master toggle", false) end)
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set " .. VOLUME_MIXER_CONTROL .. " 9%+", false) end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set " .. VOLUME_MIXER_CONTROL .. " 9%-", false) end),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer sset " .. VOLUME_MIXER_CONTROL .. " toggle", false) end)
  )
 

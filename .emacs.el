@@ -7,7 +7,6 @@
 
 ;; don't break a line after the first or before the last word of a sentence
 (add-to-list 'fill-nobreak-predicate 'fill-single-word-nobreak-p)
-(setq sentence-end-double-space nil)
 
 ;; RoR
 ; needed for rails mode
