@@ -6,7 +6,7 @@
 (require 'vl-search)
 
 ;; don't break a line after the first or before the last word of a sentence
-(add-to-list 'fill-nobreak-predicate 'fill-single-word-nobreak-p)
+(add-hook 'fill-nobreak-predicate 'fill-single-char-nobreak-p)
 
 ;; RoR
 ; needed for rails mode
