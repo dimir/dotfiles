@@ -2,7 +2,7 @@ vbell off # no visual bell
 
 hardstatus off
 hardstatus alwayslastline
-hardstatus string "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM"
 
+hardstatus string "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= @%H - %LD %d %LM"
 #hardstatus string "[screen %n%?: %t%?] %h"
 #hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c %{g}]'

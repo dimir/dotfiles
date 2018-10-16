@@ -1,0 +1,4 @@
+This directory must have volume-control git repository:
+
+  git pull https://github.com/deficient/volume-control.git
+

@@ -2,14 +2,13 @@
 require("awful")
 require("awful.autofocus")
 require("awful.rules")
--- Theme handling library
-require("beautiful")
 -- Notification library
 require("naughty")
--- Volume control
-require("volume")
--- Keyboard Layout
-require("kbd")
+
+-- volume control widget from https://github.com/deficient/volume-control
+local volume_control = require("volume-control")
+
+volumecfg = volume_control({})
 
 -- {{{ My custom functions
 require("lfs")
@@ -63,8 +62,6 @@ end
 -- }}}
 
 -- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -186,8 +183,7 @@ for s = 1, screen.count() do
        },
        mylayoutbox[s],
        mytextclock,
-       kbd_widget,
-       volume_widget,
+       volumecfg,
        s == 1 and mysystray or nil,
        mytasklist[s],
        layout = awful.widget.layout.horizontal.rightleft
@@ -258,7 +254,12 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end)
+              end),
+
+    -- Volume widget
+    awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
+    awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
+    awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end)
 )
 
 clientkeys = awful.util.table.join(
@@ -331,9 +332,7 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = true,
+      properties = { focus = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
     -- Always floating clients
@@ -342,7 +341,7 @@ awful.rules.rules = {
     { rule = { class = "Gimp" },
       properties = { floating = true } },
     -- Apply tags to clients
-    { rule = { class = "Google-chrome-stable" },
+    { rule = { class = "Chromium" },
       properties = { tag = tags[1][3] } },
     { rule = { class = "Skype" },
       properties = { tag = tags[1][4] } },
@@ -384,15 +383,13 @@ client.add_signal("manage", function (c, startup)
     end
 end)
 
-client.add_signal("focus",   function(c) c.border_color = beautiful.border_focus  end)
-client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
 -- {{{ Startup
-run_once("wicd-gtk")
+--run_once("wicd-gtk")
 run_once("klipper")
-run_once("skype")
+run_once("skypeforlinux")
 run_once("pidgin")
-run_once("google-chrome-stable")
+run_once("chromium")
 run_once("kbdd")
 -- }}}

@@ -7,7 +7,7 @@
     local fd = io.popen("amixer sget " .. VOLUME_MIXER_CONTROL)
     local status = fd:read("*all")
     fd:close()
-        
+
     local volume = tonumber(string.match(status, "(%d?%d?%d)%%")) / 100
     -- volume = string.format("% 3d", volume)
 
