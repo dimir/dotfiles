@@ -1,8 +1,9 @@
 [user]
 	name = Vladimir Levijev
-	email = vladimir.levijev@gmail.com
+	email = vl@dimir.eu
 [alias]
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	br = for-each-ref --sort upstream --format='%(color:yellow)%(refname:short)%(color:reset)%(align:width=40,position=right)%(color:green)%(upstream:short)%(color:reset)%(end)' --color=always refs/heads
 [color]
 	branch = auto
   	diff = auto
