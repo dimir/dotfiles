@@ -1,5 +1,28 @@
 # Git-aware command prompt
 
+PROMPT_COMMAND=prompter
+
+function prompter
+{
+	export PS1="$(git_line)\u${PS_AT}@${RESET}\h${PS_AT}:${PS_WORKDIR}\W${PS_AT}\$${RESET} "
+}
+
+if [ "$color_prompt" = yes ]; then
+	PS_AT='\033[1;30m'
+	PS_WORKDIR='\033[1;34m'
+	PS_GITFRAME='\033[1;34m'
+	PS_GITREPO='\033[1;32m'
+	PS_GITBRANCH='\033[0;33m'
+	RESET='\033[m'
+else
+	PS_AT=''
+	PS_WORKDIR=''
+	PS_GITFRAME=''
+	PS_GITREPO=''
+	PS_GITBRANCH=''
+	RESET=''
+fi
+
 RV=
 
 function in_git_dir
@@ -37,21 +60,3 @@ function git_line
 		echo "${PS_GITFRAME}[${PS_GITREPO}${repo}${PS_GITFRAME}:${PS_GITBRANCH}${branch}${PS_GITFRAME}]${RESET} "
 	) || echo
 }
-
-if [ "$color_prompt" = yes ]; then
-	PS_AT='\033[1;30m'
-	PS_WORKDIR='\033[1;34m'
-	PS_GITFRAME='\033[1;34m'
-	PS_GITREPO='\033[1;32m'
-	PS_GITBRANCH='\033[0;33m'
-	RESET='\033[m'
-else
-	PS_AT=''
-	PS_WORKDIR=''
-	PS_GITFRAME=''
-	PS_GITREPO=''
-	PS_GITBRANCH=''
-	RESET=''
-fi
-
-export PS1="$(git_line)\u${PS_AT}@${RESET}\h${PS_AT}:${PS_WORKDIR}\W${PS_AT}\$${RESET} "
