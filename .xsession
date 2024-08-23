@@ -8,3 +8,5 @@ xkbcomp -I${HOME}/.xkb ${HOME}/.xkb/keymap/dimir ${DISPLAY}
 xset b off
 
 xrdb -merge ${HOME}/.Xdefaults
+
+exec awesome >> ${HOME}/.logs/awesome/stdout 2>> ${HOME}/.logs/awesome/stderr

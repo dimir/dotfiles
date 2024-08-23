@@ -387,9 +387,9 @@ end)
 
 -- {{{ Startup
 --run_once("wicd-gtk")
-run_once("klipper")
-run_once("skypeforlinux")
-run_once("pidgin")
-run_once("chromium")
-run_once("kbdd")
+--run_once("klipper")
+--run_once("skypeforlinux")
+--run_once("pidgin")
+--run_once("chromium")
+--run_once("kbdd")
 -- }}}

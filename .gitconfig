@@ -1,26 +1,28 @@
 [user]
-	name = Vladimir Levijev
-	email = vl@dimir.eu
+	name = dimir
+	email = vladimir.levijev@zabbix.com
 [alias]
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	br = for-each-ref --sort upstream --format='%(color:yellow)%(refname:short)%(color:reset)%(align:width=40,position=right)%(color:green)%(upstream:short)%(color:reset)%(end)' --color=always refs/heads
+	lgg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --first-parent --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	br = for-each-ref --sort upstream --format='%(color:yellow)%(refname:short)%(color:reset)%(align:width=70,position=right)%(color:green)%(upstream:short)%(color:reset)%(end)' --color=always refs/heads
+	brr = for-each-ref --sort upstream --format='%(color:yellow)%(refname:short)%(color:reset)%(align:width=70,position=right)%(color:green)%(upstream:short)%(color:reset)%(end)' --color=always refs/remotes/origin
 [color]
 	branch = auto
-  	diff = auto
-  	status = auto
+	diff = auto
+	status = always
 [color "branch"]
-       current = yellow reverse
-       local = yellow
-       remote = green
+	current = yellow reverse
+	local = yellow
+	remote = green
 [color "diff"]
-       meta = yellow bold
-       frag = magenta bold
-       old = red bold
-       new = green bold
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
 [color "status"]
-       added = yellow
-       changed = green
-       untracked = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
 [giggle]
 	main-window-maximized = true
 	main-window-geometry = 700x550+0+187
@@ -30,3 +32,9 @@
 	file-view-vpane-position = 320
 [push]
 	default = tracking
+[credential]
+	helper = store
+[core]
+	excludesFile = ~/.gitignore
+	autocrlf = false
+	eol = lf

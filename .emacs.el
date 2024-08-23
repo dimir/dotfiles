@@ -5,6 +5,20 @@
 (require 'find-recursive)
 (require 'vl-search)
 
+;; revert buffer
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive) (revert-buffer t t))
+
+;; display line number in large files
+(setq line-number-display-limit-width 20000000)
+
+;; show vertical ruler at 121 (in emacs it's for some reason 120) column
+(require 'fill-column-indicator)
+(setq fci-rule-column 120)
+(add-hook 'c-mode-hook 'fci-mode)
+(add-hook 'perl-mode-hook 'fci-mode)
+
 ;; don't break a line after the first or before the last word of a sentence
 (add-hook 'fill-nobreak-predicate 'fill-single-char-nobreak-p)
 

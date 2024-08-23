@@ -1,6 +1,6 @@
 ! Defaults for all xterm clients
-XTerm*faceName: Dejavu Sans Mono:size=10
-XTerm*boldFont: Dejavu Sans Mono:style=Bold:size=10
+XTerm*faceName: xft:Dejavu Sans Mono:size=10
+XTerm*boldFont: xft:Dejavu Sans Mono:style=Bold:size=10
 XTerm*loginShell: true
 XTerm*scrollBar: false
 XTerm*eightBitInput: false
@@ -19,12 +19,13 @@ XTerm*background:   black
 XTerm*foreground:   white
 !XTerm*highlightColor:  red
 
+! Bell in order to support irssi notifications
+!XTerm*bellIsUrgent: true
+
 ! XTerm double-click word selection (man xterm - CHARACTER CLASSES)
 ! (treat [#&-./:=?~] as alphanumeric (48))
 XTerm*charClass: 35:48,38:48,45-47:48,58:48,61:48,63:48,126:48
-
-! Bell in order to support irssi notifications
-XTerm*bellIsUrgent: true
+UXTerm*charClass: 35:48,38:48,45-47:48,58:48,61:48,63:48,126:48
 
 UXTerm*faceName: Dejavu Sans Mono:size=10
 UXTerm*boldFont: Dejavu Sans Mono:style=Bold:size=10
@@ -42,8 +43,8 @@ UXTerm*color4: blue
 UXTerm*color5: magenta
 UXTerm*color6: cyan
 UXTerm*color7: white
-!UXTerm*background:   black
-!UXTerm*foreground:   white
+UXTerm*background:   black
+UXTerm*foreground:   white
 !UXTerm*highlightColor:  red
 
 ! After making the changes run

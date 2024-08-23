@@ -1,7 +1,59 @@
-xkb_keymap {
-	   xkb_keycodes  { include "evdev+aliases(qwerty)"		};
-	   xkb_types     { include "complete"				};
-	   xkb_compat    { include "complete+ledscroll(group_lock)"	};
-	   xkb_symbols   { include "pc+lv+inet(evdev)+ee:2+ru:3+group(alt_space_toggle)+dimir(my_parens)" };
-	   xkb_geometry  { include "pc(pc105)"				};
+xkb_keymap
+{
+	xkb_keycodes
+	{
+		include "evdev+aliases(qwerty)"
+	};
+
+	xkb_types
+	{
+		include "complete"
+
+		// type "dimir_type" {
+		// 	modifiers = Shift+LevelThree;
+		// 	map[None] = Level1;
+		// 	map[Shift] = Level2;
+		// 	map[LevelThree] = Level3;
+		// 	map[Shift+LevelThree] = Level4;
+		// 	level_name[Level1] = "Base";
+		// 	level_name[Level2] = "Shift";
+		// 	level_name[Level3] = "Alt Base";
+		// 	level_name[Level4] = "Shift Alt";
+		// };
+	};
+
+	xkb_compat
+	{
+		include "complete+ledscroll(group_lock)"
+	};
+
+	xkb_symbols
+	{
+		// must associate 3rd level with Left Alt key (last parameter)
+//		include "pc+lv+inet(evdev)+ee:2+ru:3+dimir(my_parens)+level3(lalt_switch)"
+		include "pc+lv+inet(evdev)+ee:2+ru:3+level3(lalt_switch)"
+//		include "pc+lv+inet(evdev)+ee:2+ru:3"
+
+		key <AC07>
+		{
+			// set up 4 levels of the J key: None, Shift, Alt, Alt+Shift
+			type[Group1]="FOUR_LEVEL",
+			type[Group2]="FOUR_LEVEL",
+			type[Group3]="FOUR_LEVEL",
+
+			// type[Group1]="dimir_type",
+			// type[Group2]="dimir_type",
+			// type[Group3]="dimir_type",
+
+			// use 4th level (Alt+Shift) for going backwards through the groups
+			symbols[Group1] = [j, J, ISO_Next_Group, ISO_Prev_Group],
+			symbols[Group2] = [j, J, ISO_Next_Group, ISO_Prev_Group],
+			symbols[Group3] = [Cyrillic_o, Cyrillic_O, ISO_Next_Group, ISO_Prev_Group]
+		};
+	};
+
+	xkb_geometry
+	{
+		include "pc(pc105)"
+	};
 };
